@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
-# Group visitors by IP and HTTP status code from an Apache log file.
+# Groups visitors by IP and HTTP status code
 
-if [ ! -s apache-access.log ] || [ "$(wc -l < apache-access.log)" -lt 2 ]; then
-    exit 0
-fi
-
-awk '{ count[$1" "$9]++ }
-END {
-    for (k in count)
-        print count[k], k
-}' apache-access.log | sort -nr
+awk '{print $1, $9}' apache-access.log | sort | uniq -c | sort -nr
