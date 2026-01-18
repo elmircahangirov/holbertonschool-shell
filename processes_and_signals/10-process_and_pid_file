@@ -4,16 +4,18 @@
 PID_FILE="/var/run/myscript.pid"
 
 cleanup() {
-  echo "I hate the kill command"
-  rm -f "$PID_FILE"
-  exit 0
+    echo "I hate the kill command"
+    rm -f "$PID_FILE"
+    exit 0
 }
 
 trap cleanup SIGTERM
 
-echo $$ > "$PID_FILE"
+# Create PID file immediately
+
+echo "$BASHPID" > "$PID_FILE"
 
 while true
 do
-  sleep 1
+    sleep 1
 done
