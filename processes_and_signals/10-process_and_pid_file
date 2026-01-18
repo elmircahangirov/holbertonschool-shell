@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 # Creates a PID file and handles signals
 
-mkdir -p /var/run 2>/dev/null
+PID_FILE="/var/run/myscript.pid"
 
-PID_FILE="/run/myscript.pid"
-
-echo $$ > "$PID_FILE"
+echo "$$" > "$PID_FILE"
 
 term_handler() {
-  echo "I hate the kill command"
-  rm -f "$PID_FILE"
-  exit 0
+    echo "I hate the kill command"
+    rm -f "$PID_FILE"
+    exit 0
 }
 
 int_handler() {
-  echo "Y U no love me?!"
+    echo "Y U no love me?!"
 }
 
 trap term_handler SIGTERM SIGQUIT
@@ -22,6 +20,6 @@ trap int_handler SIGINT
 
 while true
 do
-  echo "To infinity and beyond"
-  sleep 2
+    echo "To infinity and beyond"
+    sleep 2
 done
