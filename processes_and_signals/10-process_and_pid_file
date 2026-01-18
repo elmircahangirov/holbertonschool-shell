@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Script that prints messages indefinitely and handles signals using a PID file
 
 PID_FILE="/var/run/myscript.pid"
 
