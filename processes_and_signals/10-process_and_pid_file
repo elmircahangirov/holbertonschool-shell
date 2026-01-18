@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Creates a PID file and handles signals
 
+mkdir -p /var/run 2>/dev/null
+
 PID_FILE="/run/myscript.pid"
 
 echo $$ > "$PID_FILE"
