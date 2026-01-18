@@ -22,7 +22,7 @@ on_sigquit() {
   exit 0
 }
 
-echo "$$" > "$PID_FILE"
+echo "$BASHPID" > "$PID_FILE"
 
 trap on_sigterm SIGTERM
 trap on_sigint SIGINT
