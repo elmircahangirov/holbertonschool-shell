@@ -1,32 +1,32 @@
 #!/usr/bin/env bash
-# Script that prints messages indefinitely and handles signals using a PID file
+# Script that creates a PID file and handles signals
 
 PID_FILE="/var/run/myscript.pid"
+
+echo "$$" > "$PID_FILE"
 
 cleanup() {
   rm -f "$PID_FILE"
 }
 
-on_sigterm() {
+sigterm_handler() {
   echo "I hate the kill command"
   cleanup
   exit 0
 }
 
-on_sigint() {
+sigint_handler() {
   echo "Y U no love me?!"
 }
 
-on_sigquit() {
+sigquit_handler() {
   cleanup
   exit 0
 }
 
-echo "$BASHPID" > "$PID_FILE"
-
-trap on_sigterm SIGTERM
-trap on_sigint SIGINT
-trap on_sigquit SIGQUIT
+trap sigterm_handler SIGTERM
+trap sigint_handler SIGINT
+trap sigquit_handler SIGQUIT
 
 while true; do
   echo "To infinity and beyond"
